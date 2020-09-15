@@ -1,0 +1,16 @@
+{
+  "name": "5ebot",
+  "version": "1.0.0",
+  "description": "A chatbot for my stream",
+  "main": "bot.js",
+  "dependencies": {
+    "tmi.js": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fausateeeee",
+  "license": "ISC"
+}
