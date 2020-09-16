@@ -51,8 +51,6 @@ function onMessageHandler (target, context, msg, self) {
   }
 }
 
-// Function called when the "dice" command is issued
-
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
   console.log(`* Connected to ${addr}:${port}`)
