@@ -1,4 +1,3 @@
-const getCommand = require('./commands.js')
 const parser = require('./parser.js')
 const tmi = require('tmi.js')
 
@@ -28,26 +27,28 @@ function onMessageHandler (target, context, msg, self) {
   if (self) { return } // Ignore messages from the bot
 
   // Remove whitespace from chat message
-  const commandName = msg.trim()
   const payload = {
-    message: msg.trim(),
     client: client,
     target: target,
     context: context,
+    message: msg.trim(),
     log: '',
+    type: null,
     command: null,
     variables: []
   }
 
   parser(payload)
   // If the command is known, let's execute it
-  if (payload.command) {
+  if (payload.type === '!') {
+    console.log(payload)
     payload.command(payload)
-    if (commandName === '!dice') {
-    }
+    console.log(payload.log)
+  } else if (payload.type === '~') {
+    payload.client.say(payload.target, 'These types of commands are not yet implemented :( Stay tuned!')
+    console.log(`* User tried the command ${payload.command}`)
   } else {
-    client.say(target, `Unknown command: ${payload.variables[0]}`)
-    console.log(`* Unknown command ${commandName}`)
+
   }
 }
 
