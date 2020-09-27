@@ -10,6 +10,8 @@ function get (message) {
       return commands.quotes.add
     case '!hack':
       return commands.hack.current
+    case '!updatehack':
+      return commands.hack.update
     default:
       return null
   }

@@ -1,19 +1,10 @@
 const parser = require('./parser.js')
 const tmi = require('tmi.js')
-
+const auth = require('./auth.js')
 // Define configuration options
-const opts = {
-  identity: {
-    username: '5ebot',
-    password: 'oauth:taneui520k6d4hgnie7dg791wmlsk0'
-  },
-  channels: [
-    'fausateeeee'
-  ]
-}
 
 // Create a client with our options
-const client = new tmi.client(opts)
+const client = new tmi.client(auth.twitch)
 
 // Register our event handlers (defined below)
 client.on('message', onMessageHandler)
@@ -32,6 +23,7 @@ function onMessageHandler (target, context, msg, self) {
     target: target,
     context: context,
     message: msg.trim(),
+    commandName: '',
     log: '',
     type: null,
     command: null,
@@ -41,7 +33,6 @@ function onMessageHandler (target, context, msg, self) {
   parser(payload)
   // If the command is known, let's execute it
   if (payload.type === '!') {
-    console.log(payload)
     payload.command(payload)
     console.log(payload.log)
   } else if (payload.type === '~') {
